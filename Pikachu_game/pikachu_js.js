@@ -71,4 +71,54 @@ const cell_images = [
     "image/pokemon-59.jpg",
     "image/pokemon-60.jpg"
 ];
+let wrapper = document.getElementById("wrapper")
+let introFrame = document.getElementById("introFrame")
+let gameFrame = document.getElementById("gameFrame")
+let score_label = document.getElementById("score")
+let score_title = document.getElementById("score_title")
 
+let level_select = document.getElementById("levels")
+let level = document.getElementById("level_index")
+let shuffle = document.getElementById("shuffle_index")
+
+let content = document.getElementById("content")
+let start_button = document.getElementById("startButton")
+
+let end_frame = document.getElementById("end_game")
+let end_score = document.getElementById("score_end")
+let return_button = document.getElementById("backToMenu")
+let retry_button = document.getElementById("tryAgain")
+let level_retry
+var cells = []
+const themeAudio = new Audio()
+themeAudio.src = "audio/theme.mp3"
+themeAudio.volume = 0.8
+
+const scoreAudio = new Audio()
+scoreAudio.src = "audio/connect (1).mp3"
+scoreAudio.volume = 0.8
+return_button.onclick = function (){
+    returnToMenuButton()
+}
+
+const returnToMenuButton = () => {
+    location.reload() // reload the current page
+}
+
+start_button.onclick = function () {
+    init()
+    introFrame.style.display = "none"
+    gameFrame.style.display = "block"
+    timer_bar.style.display = "inline-flex"
+    labels.style.display = "inline-flex"
+    score_label.style.display = "block"
+    content.style.display = "flex"
+    clearInterval(countDown)
+    timer.style.width = "300px"
+    interval = 100
+    countDown = null
+    levelController()
+    shuffle.innerHTML = shuffleIndex
+    themeAudio.play()
+    level.innerHTML = level_select.options[level_select.selectedIndex].text
+}
